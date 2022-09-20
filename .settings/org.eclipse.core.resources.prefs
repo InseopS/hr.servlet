@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/webapp/main.jsp=UTF-8
+=======
+encoding//src/main/webapp/com/my/hr/main.jsp=UTF-8
+>>>>>>> branch 'master' of https://github.com/InseopS/hr.servlet.git
