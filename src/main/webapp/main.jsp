@@ -37,7 +37,7 @@ function isVal(field) {
     return isGood
 }
 
-function listLaborers() {	
+function listLaborers() {
    $('input').not(':radio').val('') // input에 radio가 없는 것들의 값을 ''로 초기화
    $('#laborers').empty()
    const laborerArr = []
@@ -78,25 +78,35 @@ function listLaborers() {
 function init() {
 	$('#addLaborerBtn').click(() => {
 		if(isVal($('#laborerName')) && isVal($('#hireDate'))) {
-			$.post("com/my/hr/laborerAddProc.jsp",{
-				laborerName: $('#laborerName').val(),
-				hireDate: $('#hireDate').val()
-			});
-			
-			setTimeout(() => location.href="main.jsp", 300)
+			$.ajax({
+				type:'POST',
+				url:'com/my/hr/laborerAddProc.jsp',
+				data:{
+					laborerName: $('#laborerName').val(),
+					hireDate: $('#hireDate').val()
+				},
+				success:function(data) {
+					location.href="main.jsp"
+				}
+			})
 		}		
 	})
     
    $('#fixLaborerBtn').click(() => {
 		if(isVal($('#laborerId:checked')) &&
 			isVal($('#laborerName')) && isVal($('#hireDate'))) {
-			$.post("com/my/hr/laborerFixProc.jsp",{
-				laborerId: $('#laborerId:checked').val(),
-				laborerName: $('#laborerName').val(),
-				hireDate: $('#hireDate').val()
-			});
-			
-			setTimeout(() => location.href="main.jsp", 300)
+			$.ajax({
+				type:'POST',
+				url:'com/my/hr/laborerFixProc.jsp',
+				data:{
+					laborerId: $('#laborerId:checked').val(),
+					laborerName: $('#laborerName').val(),
+					hireDate: $('#hireDate').val()
+				},
+				success:function(data) {
+					location.href="main.jsp"
+				}
+			})
 		}
 	})
    
@@ -109,13 +119,17 @@ function init() {
     })
 
 	$('#delLaborerOkBtn').click(() => {
-		$.post("com/my/hr/laborerDelProc.jsp",{
-			laborerId: $('#laborerId:checked').val()
+		$.ajax({
+			type:'POST',
+			url:'com/my/hr/laborerDelProc.jsp',
+			data:{
+				laborerId: $('#laborerId:checked').val()
+			},
+			success:function(data) {
+				$('#modal').modal('hide')
+				location.href="main.jsp"
+			}
 		});
-		
-		$('#modal').modal('hide')
-		
-		setTimeout(() => location.href="main.jsp", 300)
 	})
    
 	$('#laborers').on({
