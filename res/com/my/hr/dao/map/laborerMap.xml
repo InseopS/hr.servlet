@@ -8,12 +8,6 @@
 		order by laborer_id
 	</select>
 	
-	<select id='selectLaborer' resultMap='laborerMap'>
-		select laborer_id, name, hire_date
-		from laborers
-		where laborer_id = #{laborerId}
-	</select>
-	
 	<insert id="insertLaborer">
 		insert into laborers(laborer_id, name, hire_date)
 		values(laborer_id_seq.nextval, #{name}, #{hireDate})

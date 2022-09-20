@@ -26,7 +26,7 @@ function isVal(field) {
     let errMsg
 
     if(!field.length) errMsg = '노동자를 선택하세요.'
-    else { // field가 있고 val 값이 없으면 if문 실행 값이 있으면 종료
+    else {
         if(!field.val()) errMsg = field.attr('placeholder') + ' 입력하세요.'
         else isGood = true
     }
@@ -87,7 +87,7 @@ function init() {
 				hireDate: $('#hireDate').val()
 			});
 			
-			location.href="laborerOut.jsp"
+			setTimeout(() => location.href="laborerOut.jsp", 300)
 		}		
 	})
     
@@ -100,7 +100,7 @@ function init() {
 				hireDate: $('#hireDate').val()
 			});
 			
-			location.href="laborerOut.jsp"
+			setTimeout(() => location.href="laborerOut.jsp", 300)
 		}
 	})
    
@@ -119,7 +119,7 @@ function init() {
 		
 		$('#modal').modal('hide')
 		
-		location.href="laborerOut.jsp"
+		setTimeout(() => location.href="laborerOut.jsp", 300)
 	})
    
 	$('#laborers').on({

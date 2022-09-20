@@ -20,11 +20,6 @@ public class LaborerServiceImpl implements LaborerService {
 	}
 
 	@Override
-	public Laborer getLaborer(int laborerId) {
-		return laborerDao.selectLaborer(laborerId);
-	}
-
-	@Override
 	public void addLaborer(String laborerName, LocalDate hireDate) {
 		laborerDao.insertLaborer(laborerName, hireDate);
 	}

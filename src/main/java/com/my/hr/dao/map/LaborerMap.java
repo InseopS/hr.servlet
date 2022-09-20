@@ -9,7 +9,6 @@ import com.my.hr.domain.Laborer;
 
 public interface LaborerMap {
 	List<Laborer> selectLaborers();
-	Laborer selectLaborer(int laborerId);
 	void insertLaborer(@Param("name") String laborerName, 
 					@Param("hireDate") LocalDate hireDate);
 	void updateLaborer(Laborer laborer);
