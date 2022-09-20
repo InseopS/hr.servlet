@@ -13,4 +13,3 @@
 	
 	laborerService.addLaborer(laborerName, date);
 %>
-$.post("laborerOut.jsp", a);

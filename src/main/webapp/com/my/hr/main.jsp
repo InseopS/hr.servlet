@@ -7,7 +7,6 @@
 <%
 	LaborerService laborerService = new LaborerServiceImpl();
 %>
-
 <head>
     <title>HR</title>
     <meta charset='utf-8'>
@@ -18,8 +17,6 @@
     <link rel='stylesheet' href='http://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' />
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.6.3/css/all.css' />
 <script>
-const laborers = []
-let laborerId = 0
 
 function isVal(field) {
     let isGood = false
@@ -40,8 +37,7 @@ function isVal(field) {
     return isGood
 }
 
-function listLaborers() {
-	
+function listLaborers() {	
    $('input').not(':radio').val('') // input에 radio가 없는 것들의 값을 ''로 초기화
    $('#laborers').empty()
    const laborerArr = []
@@ -82,12 +78,12 @@ function listLaborers() {
 function init() {
 	$('#addLaborerBtn').click(() => {
 		if(isVal($('#laborerName')) && isVal($('#hireDate'))) {
-			$.post("laborerIn.jsp",{
+			$.post("laborerAdd.jsp",{
 				laborerName: $('#laborerName').val(),
 				hireDate: $('#hireDate').val()
 			});
 			
-			setTimeout(() => location.href="laborerOut.jsp", 300)
+			setTimeout(() => location.href="main.jsp", 300)
 		}		
 	})
     
@@ -100,7 +96,7 @@ function init() {
 				hireDate: $('#hireDate').val()
 			});
 			
-			setTimeout(() => location.href="laborerOut.jsp", 300)
+			setTimeout(() => location.href="main.jsp", 300)
 		}
 	})
    
@@ -119,7 +115,7 @@ function init() {
 		
 		$('#modal').modal('hide')
 		
-		setTimeout(() => location.href="laborerOut.jsp", 300)
+		setTimeout(() => location.href="main.jsp", 300)
 	})
    
 	$('#laborers').on({
