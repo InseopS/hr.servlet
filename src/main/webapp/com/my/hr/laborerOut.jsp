@@ -81,37 +81,57 @@ function listLaborers() {
 
 function init() {
 	$('#addLaborerBtn').click(() => {
-		<c:set var='laborerName' scope='request'>${laborerName}</c:set>
-		<c:set var='hireDate' scope='request'>${hireDate}</c:set>
-		<jsp:forward page='laborerIn.jsp'/>
-		listLaborers()
+		if(isVal($('#laborerName')) && isVal($('#hireDate'))) {
+			$.post("laborerIn.jsp",{
+				laborerName: $('#laborerName').val(),
+				hireDate: $('#hireDate').val()
+			});
+			
+			location.href="laborerOut.jsp"
+		}		
 	})
     
    $('#fixLaborerBtn').click(() => {
-	   <jsp:forward page='laborerFix.jsp'/>
-	   listLaborers()
-   })
+		if(isVal($('#laborerId:checked')) &&
+			isVal($('#laborerName')) && isVal($('#hireDate'))) {
+			$.post("laborerFix.jsp",{
+				laborerId: $('#laborerId:checked').val(),
+				laborerName: $('#laborerName').val(),
+				hireDate: $('#hireDate').val()
+			});
+			
+			location.href="laborerOut.jsp"
+		}
+	})
    
    $('#delLaborerBtn').click(() => {
-	   <jsp:forward page='laborerDel.jsp'/>
-   })
+        if(isVal($('#laborerId:checked'))) {
+            $('#modalMsg').text('노동자를 삭제하시겠습니까?')
+            $('#modalBtn').show()
+            $('#modal').modal()
+        }
+    })
 
-   $('#delLaborerOkBtn').click(() => {
-	   <jsp:forward page='laborerDel.jsp'/>
-       $('#modal').modal('hide')
-       listLaborers()
-   })
+	$('#delLaborerOkBtn').click(() => {
+		$.post("laborerDel.jsp",{
+			laborerId: $('#laborerId:checked').val()
+		});
+		
+		$('#modal').modal('hide')
+		
+		location.href="laborerOut.jsp"
+	})
    
-   $('#laborers').on({
-    change() {
-        $('#laborerName').val($(this).parent().next().next().text())
-        $('#hireDate').val($(this).parent().next().next().next().text())
-    }
-}, '#laborerId')
-
-$(listLaborers)
+	$('#laborers').on({
+		change() {
+			$('#laborerName').val($(this).parent().next().next().text())
+			$('#hireDate').val($(this).parent().next().next().next().text())
+   	}
+	}, '#laborerId')
 }
 
+$(listLaborers)
+$(init)
 
 </script>
 <style>
