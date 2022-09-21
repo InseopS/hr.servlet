@@ -43,21 +43,17 @@ function listLaborers() {
    const laborerArr = []
 <%	
 	List<Laborer> laborersTmp = laborerService.getLaborers();
-   String[] arrTmp;
-   String strTmp = "";
    
    if(laborersTmp.size() != 0) {
-	   for(int i = laborersTmp.size(); i > 0; i--) {
-		   strTmp = laborersTmp.get(i-1).toString();
-		   arrTmp = strTmp.split(" ");
+	   for(Laborer laborer : laborersTmp) {
 %>
-			laborerArr.push(
+			laborerArr.unshift(
 	         `<tr>
 	             <td><input type='radio' name='laborerId' id='laborerId'
-	                     value='<%= arrTmp[0] %>'/></td>
-	             <td><%= arrTmp[0] %></td>
-	             <td><%= arrTmp[1] %></td>
-	             <td><%= arrTmp[2] %></td>
+	                     value='<%= laborer.getLaborerId() %>'/></td>
+	             <td><%= laborer.getLaborerId() %></td>
+	             <td><%= laborer.getName() %></td>
+	             <td><%= laborer.getHireDate() %></td>
 	         </tr>`
          )
 <%
@@ -134,8 +130,8 @@ function init() {
    
 	$('#laborers').on({
 		change() {
-			$('#laborerName').val($(this).parent().next().next().text())
-			$('#hireDate').val($(this).parent().next().next().next().text())
+			$('#laborerName').val($(this).parent().siblings().eq(1).text())
+			$('#hireDate').val($(this).parent().siblings().eq(2).text())
    	}
 	}, '#laborerId')
 }
